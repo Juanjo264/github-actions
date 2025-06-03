@@ -13,7 +13,7 @@ jobs:
         
       - name: Echo Step 1
         run: echo "🎉 New commit detected on the main branch!"
-
+      
       - name: Echo Step 2
         run: echo "🔄 Starting the workflow..."
 
@@ -24,6 +24,7 @@ jobs:
         run: echo "✅ Workflow completed successfully!"
 
   second-job:
+    if: false 
     needs: echo-job
     runs-on: ubuntu-latest
 

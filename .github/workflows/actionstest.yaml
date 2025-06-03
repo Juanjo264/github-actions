@@ -24,7 +24,7 @@ jobs:
         run: echo "✅ Workflow completed successfully!"
 
   second-job:
-    if: false 
+    if: ${{ github.ref == 'refs/heads/main' }} 
     needs: echo-job
     runs-on: ubuntu-latest
 

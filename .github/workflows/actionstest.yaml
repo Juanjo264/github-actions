@@ -22,3 +22,11 @@ jobs:
 
       - name: Echo Step 4
         run: echo "✅ Workflow completed successfully!"
+
+  second-job:
+    needs: echo-job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Hola mundo2
+        run: echo "Hola Mundo 2"        

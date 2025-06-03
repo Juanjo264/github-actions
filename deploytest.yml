@@ -1,0 +1,13 @@
+name: DEPLOY TO SERVER
+
+on: push
+
+jobs:
+  first-job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hola Mundo
+        run: echo "Hola Mundo"
+      
+      
+        

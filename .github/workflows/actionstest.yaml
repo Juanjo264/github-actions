@@ -30,4 +30,4 @@ jobs:
 
     steps:
       - name: Hola mundo2
-        run: echo "Hola Mundo 2"        
+        run: echo "Hola Mundo  ${{ github.ref }}"        

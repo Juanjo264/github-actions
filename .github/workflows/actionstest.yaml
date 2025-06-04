@@ -32,4 +32,4 @@ jobs:
 
     steps:
       - name: Hola mundo2
-        run: echo "Hola Mundo  ${{ github.ref }}"        
+        run: echo "Hola Mundo $ENV ${{ github.ref }}"        

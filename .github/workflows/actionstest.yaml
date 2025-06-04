@@ -12,17 +12,6 @@ jobs:
     steps:
       - name: Echo Step 1
         run: echo "🎉 New commit detected on the main branch! $NAME"
-      
-      - name: Working dir
-        run: ls -al
-
-      - name: Action
-        uses: actions/checkout@v4
-        with:
-          
-
-      - name: working dir after action
-        run: ls -al
 
       - name: mensaje
         id: mensajestep
@@ -30,6 +19,15 @@ jobs:
 
       - name: obtener mensaje
         run: echo " ${{ steps.mensajestep.outputs.myvariable }}"
+
+      - name: Working dir
+        run: ls -al
+
+      - name: Action
+        uses: actions/checkout@v4
+        
+      - name: working dir after action
+        run: ls -al
 
   second-job:
     if: ${{ github.ref == 'refs/heads/main' }} 

@@ -10,15 +10,26 @@ jobs:
 
   echo-job:
     runs-on: ubuntu-latest
-    
+
     outputs:
       salida: ${{ steps.mensajestep.outputs.myvariable }}
 
     env:
       NAME: "Juan" 
+
     steps:
       - name: Echo Step 1
         run: echo "🎉 New commit detected on the main branch! $NAME"
+
+      - name: Generar archivo
+        run: 
+          echo "Archivo de prueba" >> test.log
+
+      - name: subir artefacto
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-artifact
+          path: test.log
 
       - name: mensaje
         id: mensajestep
@@ -47,6 +58,3 @@ jobs:
     steps:
       - name: Hola mundo2
         run: echo "Hola Mundo ${{ github.ref }}"        
-
-      - name: salida
-        run: echo ${ salida }

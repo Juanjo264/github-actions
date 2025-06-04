@@ -11,8 +11,6 @@ jobs:
   echo-job:
     runs-on: ubuntu-latest
 
-    outputs:
-      salida: ${{ steps.mensajestep.outputs.myvariable }}
 
     env:
       NAME: "Juan" 
@@ -31,12 +29,6 @@ jobs:
           name: test-artifact
           path: test.log
 
-      - name: mensaje
-        id: mensajestep
-        run: echo "myvariable=holamundo" >> $GITHUB_OUTPUT
-
-      - name: obtener mensaje
-        run: echo " ${{ steps.mensajestep.outputs.myvariable }}"
 
       - name: Working dir
         run: ls -al
@@ -51,9 +43,6 @@ jobs:
     if: ${{ github.ref == 'refs/heads/main' }} 
     needs: echo-job
     runs-on: ubuntu-latest
-
-    env:
-      salida: ${{ steps.mensajestep.outputs.myvariable }}
 
     steps:
       - name: Hola mundo2

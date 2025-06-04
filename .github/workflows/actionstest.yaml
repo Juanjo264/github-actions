@@ -10,20 +10,17 @@ jobs:
     env:
       NAME: "Juan" 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-        
       - name: Echo Step 1
         run: echo "🎉 New commit detected on the main branch! $NAME"
       
-      - name: Echo Step 2
-        run: echo "🔄 Starting the workflow..."
+      - name: Working dir
+        run: ls -al
 
-      - name: Echo Step 3
-        run: echo "🚀 Performing some checks..."
+      - name: Action
+        uses: actions/checkout@v4
 
-      - name: Echo Step 4
-        run: echo "✅ Workflow completed successfully!"
+      - name: working dir after action
+        run: ls -al
 
   second-job:
     if: ${{ github.ref == 'refs/heads/main' }} 

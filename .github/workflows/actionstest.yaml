@@ -18,9 +18,18 @@ jobs:
 
       - name: Action
         uses: actions/checkout@v4
+        with:
+          
 
       - name: working dir after action
         run: ls -al
+
+      - name: mensaje
+        id: mensajestep
+        run: echo "myvariable=holamundo" >> $GITHUB_OUTPUT
+
+      - name: obtener mensaje
+        run: echo " ${{ steps.mensajestep.outputs.myvariable }}"
 
   second-job:
     if: ${{ github.ref == 'refs/heads/main' }} 

@@ -8,50 +8,14 @@ jobs:
 
 
 
-  echo-job:
+  firstjob:
     runs-on: ubuntu-latest
 
 
-    env:
-      NAME: "Juan" 
-
-    steps:
-      - name: Echo Step 1
-        run: echo "🎉 New commit detected on the main branch! $NAME"
-
-      - name: Generar archivo
-        run: 
-          echo "Archivo de prueba" >> test.log
-
-      - name: subir artefacto
-        uses: actions/upload-artifact@v4
-        with:
-          name: test-artifact
-          path: test.log
-
-
-      - name: Working dir
-        run: ls -al
-
-      - name: Action
-        uses: actions/checkout@v4
+    strategy:
+      matrix: 
+        message: ["hola", "test", "test2"]
         
-      - name: working dir after action
-        run: ls -al
-
-  second-job:
-    if: ${{ github.ref == 'refs/heads/main' }} 
-    needs: echo-job
-    runs-on: ubuntu-latest
-
     steps:
-      - name: Hola mundo2
-        run: echo "Hola Mundo ${{ github.ref }}"        
-
-      - name: descargar archivo
-        uses: actions/download-artifact@v4
-        with:
-          name: test-artifact
-
-      - name: cat test.log
-        run: cat test.log
+      - name: print message
+        run: echo  "${{ matrix.message }}"

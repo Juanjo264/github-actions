@@ -1,4 +1,4 @@
-name: Echo message to push name
+name: Deploy test
 
 on: 
   push:
@@ -6,16 +6,8 @@ on:
 
 jobs:
 
-
-
   firstjob:
     runs-on: ubuntu-latest
-
-
-    strategy:
-      matrix: 
-        message: ["hola", "test", "test2"]
-        
     steps:
-      - name: print message
-        run: echo  "${{ matrix.message }}"
+      - name: print variable
+        run: echo  "${{ secrets.TOKEN }}"

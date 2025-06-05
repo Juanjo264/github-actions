@@ -55,3 +55,26 @@ jobs:
 
       - name: cat test.log
         run: cat test.log
+==============
+name: Echo message to push name
+
+on: 
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+
+
+  firstjob:
+    runs-on: ubuntu-latest
+
+
+    strategy:
+      matrix: 
+        message: ["hola", "test", "test2"]
+        
+    steps:
+      - name: print message
+        run: echo  "${{ matrix.message }}"
+

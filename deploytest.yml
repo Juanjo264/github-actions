@@ -96,3 +96,74 @@ jobs:
 
       - name: print variable
         run: echo  "${{ secrets.TOKEN }}"
+
+
+===========================
+name: Deploy test
+
+on: 
+  push:
+    branches: [ "main" ]
+
+jobs:
+
+  firstjob:
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name : Checkout code
+      uses: actions/checkout@v4
+
+    - name: setup
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: install dependencies
+      run: npm install
+
+    - name: run tests
+      run: npm run test
+
+    - name: build page
+      run: npm run build
+
+    - name: upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: public/
+
+  Deploy:
+    runs-on: ubuntu-latest
+    needs: firstjob
+
+    permissions:
+      pages: write
+      id-token: write
+
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment-pages.outputs.page_url }}
+
+    steps:
+      - name: Deploy
+        id: deployment-pages
+        uses: actions/deploy-pages@v4
+
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: Deploy
+    if: ${{ always() }}
+
+    steps:
+      - name: Notify to slack
+        uses: 8398a7/action-slack@v3
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK }}
+          
+        with:
+          status: ${{ job.status }}
+          fields: workflow, job, commit, author, message, repo

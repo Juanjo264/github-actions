@@ -28,6 +28,11 @@ jobs:
     - name: build page
       run: npm run build
 
+    - name: upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        path: public/
+
   Deploy:
     runs-on: ubuntu-latest
     needs: firstjob

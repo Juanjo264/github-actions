@@ -42,7 +42,7 @@ jobs:
       id-token: write
 
 
-    environments:
+    environment:
       name: github-pages
       url: ${{ steps.deployment-pages.outputs.page_url }}
 
